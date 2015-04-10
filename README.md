@@ -1,4 +1,6 @@
 # Tut2
+#ifndef Fraction_h
+#define Fraction_h
 #include <iostream>
 using namespace std;
 
@@ -26,4 +28,26 @@ private:
 	~Fraction();					//default destructor
 };
 
+#endif 
+
+//main driver program
+#include <iostream>
+#include "Fraction.h"
+
+using namespace std;
+
+int main()
+{
+
+
+	Fraction frac1(5, 3);
+
+	Fraction frac2(2, 2);
+
+
+	frac1.add(frac2).print();
+
+	system("pause");
+	return 0;
+}
 
