@@ -1,0 +1,331 @@
+#ifndef TICTAC_H
+#define TICTAC_H
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+
+
+class TicTacToe
+{
+private:
+	char board[3][3];
+	bool move(int, int);
+
+public:
+	TicTacToe();
+	void gmInstruct();
+	void disBoard();
+	void player1(int);
+	void player2(int);
+	bool checkWin();
+	bool checkDraw();
+	void RESTART();
+};
+
+#endif
+
+#include <iostream>
+#include "TicTacToe.h"
+
+using namespace std;
+
+// Constructor
+TicTacToe::TicTacToe()
+{
+
+	board[0][0] = '1'; board[0][1] = '2'; board[0][2] = '3';
+	board[1][0] = '4'; board[1][1] = '5'; board[1][2] = '6';
+	board[2][0] = '7'; board[2][1] = '8'; board[2][2] = '9';
+
+}
+// Game rules and instructions
+void TicTacToe::gmInstruct()
+{
+
+	cout << " =-=-=-=-| Welcome to TicTac Toe Game! |-=-=-=-=" << endl << endl;
+	cout << " RULES of the game:" << endl;
+	cout << " Players try as much as possible to match your" << endl;
+	cout << " three respective markers in the same row, column" << endl;
+	cout << " or diagonal. And the player to do that first will" << endl;
+	cout << " be a WINNER. If either players fail to match their" << endl;
+	cout << " respective markers until the spaces are all filled." << endl;
+	cout << " A DRAW it will be." << endl << endl;
+	cout << " INSTRUCTIONS" << endl;
+	cout << " Each block/space is assigned a number (shown below)." << endl;
+	cout << " Press the number to place your marker to and Press" << endl;
+	cout << " ENTER button. " << endl << endl;
+	cout << " Play smart, Goodluck!!" << endl << endl;
+	cout << endl << " The board is numbered as follows." << endl;
+	disBoard();
+
+}
+// Display the board
+void TicTacToe::disBoard()
+{
+	cout << endl;
+	cout << "         |     |     " << endl;
+	cout << "      " << board[0][0] << "  |  " << board[0][1] << "  |  " << board[0][2] << endl;
+	cout << "    -----+-----+-----" << endl;
+	cout << "         |     |     " << endl;
+	cout << "      " << board[1][0] << "  |  " << board[1][1] << "  |  " << board[1][2] << endl;
+	cout << "    -----+-----+-----" << endl;
+	cout << "         |     |     " << endl;
+	cout << "      " << board[2][0] << "  |  " << board[2][1] << "  |  " << board[2][2] << endl;
+}
+
+// Check Wins
+bool TicTacToe::checkWin()
+{
+
+	if (board[0][0] == board[0][1] && board[0][0] == board[0][2]) { return true; }			// row1
+	else if (board[1][0] == board[1][1] && board[1][0] == board[1][2]) { return true; }		// row2
+	else if (board[2][0] == board[2][1] && board[2][0] == board[2][2]) { return true; }		// row3
+	else if (board[0][0] == board[1][0] && board[0][0] == board[2][0]) { return true; }		// column1
+	else if (board[0][1] == board[1][1] && board[0][1] == board[2][1]) { return true; }		// column2
+	else if (board[0][2] == board[1][2] && board[0][2] == board[2][2]) { return true; }		// column3
+	else if (board[0][0] == board[1][1] && board[0][0] == board[2][2]) { return true; }		// right left diagonal
+	else if (board[0][2] == board[1][1] && board[0][2] == board[2][0]) { return true; }		// left right diagonal
+	else { return false; }
+
+}
+
+// Check if Draw
+bool TicTacToe::checkDraw()
+{
+	int drw = 0;
+
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			if (board[i][j] == 'X' || board[i][j] == 'O') { drw += 1; }
+		}
+	}
+
+	if (drw == 9) { return true; }
+	else { return false; }
+}
+
+// Resetting the board
+void TicTacToe::RESTART()
+{
+
+	board[0][0] = '1'; board[0][1] = '2'; board[0][2] = '3';
+	board[1][0] = '4'; board[1][1] = '5'; board[1][2] = '6';
+	board[2][0] = '7'; board[2][1] = '8'; board[2][2] = '9';
+
+}
+
+// Player one's play
+void TicTacToe::player1(int pos)
+{
+	if (checkWin() != true)
+	{
+		switch (pos)
+		{
+		case 1:{
+			if (move(0, 0) == true) { board[0][0] = 'X'; }
+			else { cout << endl << " Invalid Play!!" << endl; }
+			break;
+		}
+		case 2:{
+			if (move(0, 1) == true) { board[0][1] = 'X'; }
+			else { cout << endl << " Invalid Play!!" << endl;; }
+			break;
+		}
+		case 3:{
+			if (move(0, 2) == true) { board[0][2] = 'X'; }
+			else { cout << endl << " Invalid Play!!" << endl;; }
+			break;
+		}
+		case 4:{
+			if (move(1, 0) == true) { board[1][0] = 'X'; }
+			else { cout << endl << " Invalid Play!!" << endl;; }
+			break;
+		}
+		case 5:{
+			if (move(1, 1) == true) { board[1][1] = 'X'; }
+			else { cout << endl << " Invalid Play!!" << endl;; }
+			break;
+		}
+		case 6:{
+			if (move(1, 2) == true) { board[1][2] = 'X'; }
+			else { cout << endl << " Invalid Play!!" << endl;; }
+			break;
+		}
+		case 7:{
+			if (move(2, 0) == true) { board[2][0] = 'X'; }
+			else { cout << endl << " Invalid Play!!" << endl;; }
+			break;
+		}
+		case 8:{
+			if (move(2, 1) == true) { board[2][1] = 'X'; }
+			else { cout << endl << " Invalid Play!!" << endl;; }
+			break;
+		}
+		case 9:{
+			if (move(2, 2) == true) { board[2][2] = 'X'; }
+			else { cout << endl << " Invalid Play!!" << endl;; }
+			break;
+		}
+		default:{
+			cout << endl << " Invalid Move!!!" << endl;
+		}
+		}
+	}
+}
+
+// Player Two's play
+void TicTacToe::player2(int pos)
+{
+	if (checkWin() != true)
+	{
+		switch (pos)
+		{
+		case 1:{
+			if (move(0, 0) == true) { board[0][0] = 'O'; }
+			else { cout << endl << " Invalid Play!!" << endl;; }
+			break;
+		}
+		case 2:{
+			if (move(0, 1) == true) { board[0][1] = 'O'; }
+			else { cout << endl << " Invalid Play!!" << endl;; }
+			break;
+		}
+		case 3:{
+			if (move(0, 2) == true) { board[0][2] = 'O'; }
+			else { cout << endl << " Invalid Play!!" << endl;; }
+			break;
+		}
+		case 4:{
+			if (move(1, 0) == true) { board[1][0] = 'O'; }
+			else { cout << endl << " Invalid Play!!" << endl;; }
+			break;
+		}
+		case 5:{
+			if (move(1, 1) == true) { board[1][1] = 'O'; }
+			else { cout << endl << " Invalid Play!!" << endl;; }
+			break;
+		}
+		case 6:{
+			if (move(1, 2) == true) { board[1][2] = 'O'; }
+			else { cout << endl << " Invalid Play!!" << endl;; }
+			break;
+		}
+		case 7:{
+			if (move(2, 0) == true) { board[2][0] = 'O'; }
+			else { cout << endl << " Invalid Play!!" << endl;; }
+			break;
+		}
+		case 8:{
+			if (move(2, 1) == true) { board[2][1] = 'O'; }
+			else { cout << endl << " Invalid Play!!" << endl;; }
+			break;
+		}
+		case 9:{
+			if (move(2, 2) == true) { board[2][2] = 'O'; }
+			else { cout << endl << " Invalid Play!!" << endl;; }
+			break;
+		}
+		default:{
+			cout << endl << " Invalid Move!!!" << endl;
+		}
+		}
+	}
+}
+
+// Moving to Valid Position
+bool TicTacToe::move(int row, int col)
+{
+	if (board[row][col] == 'X' || board[row][col] == 'O') { return false; }
+	else { return true; }
+}
+
+
+//TicTacToe Main programme 
+
+
+#include <iostream>
+#include <stdlib.h>
+#include <string>
+
+#include "TicTacToe.h"
+
+using namespace std;
+
+int main()
+{
+	int p;
+
+	TicTacToe TicTac;
+	TicTac.gmInstruct(); cout << endl;
+	system("pause");
+
+start:{
+	string plyr1, plyr2;
+
+	cout << "\n ============================" << endl << endl;
+	cout << "      Let The Game Bigin" << endl;
+	cout << " ----------------------------" << endl;
+
+	cout << " First player name: "; cin >> plyr1;
+	cout << " Second player name: "; cin >> plyr2;
+	cout << endl << " ----------------------------";
+
+	while (TicTac.checkWin() != true || TicTac.checkDraw() != true)
+	{
+		// Player One
+		cout << endl << " " << plyr1 << " your Turn (X): "; cin >> p; TicTac.player1(p);
+		cout << " ----------------------------" << endl;
+
+		if (TicTac.checkWin() == true) { cout << " " << plyr1 << " WIN!" << endl; TicTac.disBoard(); cout << endl << endl; break; }
+		else if (TicTac.checkDraw() == true) { cout << " Draw!" << endl; TicTac.disBoard(); cout << endl << endl; break; }
+
+		TicTac.disBoard();
+		cout << endl << " ----------------------------" << endl;
+
+		// Player Two
+		cout << " " << plyr2 << " your Turn (O): "; cin >> p; TicTac.player2(p);
+		cout << " ----------------------------" << endl;
+
+		if (TicTac.checkWin() == true) { cout << " " << plyr2 << " WIN!" << endl; TicTac.disBoard(); cout << endl << endl; break; }
+		else if (TicTac.checkDraw() == true) { cout << " Draw!" << endl; TicTac.disBoard(); cout << endl << endl; break; }
+
+		TicTac.disBoard();
+		cout << endl << " ----------------------------";
+	}
+}
+	  int choice;
+	  cout << " ============================" << endl;
+	  cout << " 1. New game." << endl << " 2. Exit." << endl << " > ";
+
+  nwGmOrExt:{
+
+	  cin >> choice;
+
+	  switch (choice)
+	  {
+	  case 1:{
+		  TicTac.RESTART();
+		  cout << " ----------------------------";
+		  TicTac.disBoard();
+		  goto start;
+		  break;
+	  }
+	  case 2:{
+		  break;
+	  }
+	  default:{
+		  cout << " Invalid option. Please try again." << endl;
+		  goto nwGmOrExt;
+	  }
+	  }
+  }
+
+			cout << endl << " ============================" << endl << endl;
+			system("pause");
+			return 0;
+}
